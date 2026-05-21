@@ -18,7 +18,7 @@ jobs:
         dotnet-version: '10.0'
 
     - name: Publish app
-      run: dotnet publish -c Release -o ./publish
+      run: dotnet publish BackendTeams/BackendTeams.csproj -c Release -o ./publish
 
     - name: Deploy to Azure Web App
       uses: azure/webapps-deploy@v3
