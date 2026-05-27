@@ -10,12 +10,12 @@ var builder = WebApplication.CreateBuilder(args);
 
 
 // LÅSER SÅ MAN MÅSTE SKRIVA IN SÄKERHETSNYCKEL FÖR SWAGGER
-builder.Services.AddControllers(options =>
+/*builder.Services.AddControllers(options =>
 {
     options.Filters.Add<ApiKeyAuthFilter>();
-});
+});*/
 
-
+builder.Services.AddControllers();
 
 
 
@@ -53,13 +53,15 @@ builder.Services.AddSwagger();
 
 
 // DATABASEN
-builder.Services.AddDbContext<TeamsDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLAzure")));
+// DÅ VI INTE HAR EN DATABAS JUST NU SÅ FÅR VI KOMMENTERA UT DENNA
+/*builder.Services.AddDbContext<TeamsDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLAzure")));*/
 
 
 // IApplicationDbContext som just nu ger all info från TeamsDbContext till servicen
-builder.Services.AddScoped<BackendTeams.Application.Interfaces.IApplicationDbContext>(provider =>
-    provider.GetRequiredService<TeamsDbContext>());
+//Också utkommenterad för att allt inte ska krascha
+/*builder.Services.AddScoped<BackendTeams.Application.Interfaces.IApplicationDbContext>(provider =>
+    provider.GetRequiredService<TeamsDbContext>());*/
 
 
 
