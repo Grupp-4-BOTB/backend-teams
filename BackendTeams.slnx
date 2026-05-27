@@ -1,0 +1,6 @@
+<Solution>
+  <Project Path="BackendTeams.Application/BackendTeams.Application.csproj" />
+  <Project Path="BackendTeams.Domain/BackendTeams.Domain.csproj" />
+  <Project Path="BackendTeams.Infrastructure/BackendTeams.Infrastructure.csproj" />
+  <Project Path="BackendTeams/BackendTeams.csproj" />
+</Solution>
