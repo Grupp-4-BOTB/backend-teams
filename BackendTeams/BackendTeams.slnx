@@ -1,6 +1,0 @@
-<Solution>
-  <Project Path="../BackendTeams.Application/BackendTeams.Application.csproj" Id="13fcd80d-4490-4d85-ae6e-443f52f582f4" />
-  <Project Path="../BackendTeams.Domain/BackendTeams.Domain.csproj" Id="78121989-ddae-4077-89a8-2a99ad1cd8a0" />
-  <Project Path="../BackendTeams.Infrastructure/BackendTeams.Infrastructure.csproj" Id="73d9880c-d376-4e63-8fc9-15f4109e99c3" />
-  <Project Path="BackendTeams.csproj" />
-</Solution>
