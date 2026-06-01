@@ -34,6 +34,9 @@ namespace BackendTeams.Controllers
         {
             if (response.Accept)
             {
+
+                try
+                { 
                 var newMember = new MemberEntity
                 {
                     Id = Guid.NewGuid().ToString(),
@@ -43,6 +46,12 @@ namespace BackendTeams.Controllers
 
                 _context.Members.Add(newMember);
                 await _context.SaveChangesAsync();
+                }
+
+                catch
+                {
+                    return BadRequest("Database currently missing. Not able to add member to a group.");
+                }
             }
 
             return Ok(new { message = response.Accept ? "User successfully added to the group" : "Denied" }); //STATUSKOD I WEBBLÄSAREN
@@ -58,17 +67,26 @@ namespace BackendTeams.Controllers
         [HttpGet("groups/{groupId}")]
         public async Task<IActionResult> GetMembers(string groupId)
         {
-            var members = await _context.Members
+
+            try
+            {
+
+                var members = await _context.Members
                 .Where(m => m.GroupId == groupId)
                 .Select(m => new {
                     id = m.Id,
                     name = m.UserId,     // UserId skickas som 'name' till frontenden så länge
-                    role = "Student"     // HÅRDKODAD SÅLÄNGE, OM TID FINNS KOMMER DEN FIXAS SÅ ANVÄNDARE KANSKE KAN VÄLJA DETTA I MAILET SOM SKICKAS UT ELLER I GABRIELS DEL ELLER I EMILS PROFILE DEL.
+                    role = "Student"     // HÅRDKODAD "STUDENT" SÅLÄNGE, OM TID FINNS KOMMER DEN FIXAS SÅ ANVÄNDARE KANSKE KAN VÄLJA DETTA I MAILET SOM SKICKAS UT ELLER I GABRIELS DEL ELLER I EMILS PROFILE DEL.
                                          // OSÄKER JUST NU PÅ OM DEN SKA FINNAS REDAN I IDENTITY SKAPNING AV KONTO ELLER SENARE VAL AV ANVÄNDARE.
                 })
                 .ToListAsync();
 
             return Ok(members);
+            }
+            catch
+            {
+                return BadRequest("Database currently missing. Unable to fetch members.");
+            }
         }
 
 
@@ -79,13 +97,21 @@ namespace BackendTeams.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMember(string id)
         {
-            var member = await _context.Members.FirstOrDefaultAsync(m => m.Id == id);
+            try
+            {
+                var member = await _context.Members.FirstOrDefaultAsync(m => m.Id == id);
             if (member == null) return NotFound();
 
             _context.Members.Remove(member);
             await _context.SaveChangesAsync();
 
             return Ok();
+
+            }
+            catch
+            {
+                return BadRequest("Database currently missing. Unable to delete member.");
+            }
         }
     }
 }
