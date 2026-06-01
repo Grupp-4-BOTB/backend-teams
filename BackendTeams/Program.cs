@@ -1,7 +1,7 @@
-using BackendTeams.API.Swagger;
+//using BackendTeams.API.Swagger;
 using BackendTeams.Infrastructure.Data;
 using BackendTeams.Security;
-using BackendTeams.Swagger;
+//using BackendTeams.Swagger;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -49,7 +49,7 @@ builder.Services.AddScoped<BackendTeams.Application.Interfaces.IMemberService, B
 
 
 // SWAGGER
-builder.Services.AddSwagger();
+//builder.Services.AddSwagger();
 
 
 // DATABASEN
@@ -67,14 +67,9 @@ var app = builder.Build();
 
 
 
-// dessa 2 FÖR JWT SPECIFIKT. När användaren trycker på mailet i modul 1 > behöver sen modul 2 och gabriels inloggningsdel dessa
-// app.UseAuthentication();
-// app.UseAuthorization();
-
-
 
 // SWAGGER
-app.MapSwagger(app.Environment);
+//app.MapSwagger(app.Environment);
 
 
 
@@ -83,7 +78,10 @@ app.UseHttpsRedirection();
 
 app.UseCors();
 
-app.UseAuthorization();
+
+// dessa 2 FÖR JWT SPECIFIKT. När användaren trycker på mailet i modul 1 > behöver sen modul 2 och gabriels inloggningsdel dessa
+// app.UseAuthentication();
+// app.UseAuthorization();
 
 app.MapControllers();
 

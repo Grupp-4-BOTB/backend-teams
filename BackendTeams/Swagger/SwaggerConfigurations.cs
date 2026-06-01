@@ -1,4 +1,4 @@
-﻿using Microsoft.OpenApi;
+﻿/*using Microsoft.OpenApi;
 
 namespace BackendTeams.Swagger;
 
@@ -29,6 +29,6 @@ public static class SwaggerConfigurations
 
         return services;
     }
-}
+}*/
 
 
