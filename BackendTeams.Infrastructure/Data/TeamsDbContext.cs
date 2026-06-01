@@ -11,7 +11,6 @@ public class TeamsDbContext : DbContext, IApplicationDbContext
     {
     }
 
-    public DbSet<GroupEntity> Groups { get; set; }
     public DbSet<MemberEntity> Members { get; set; }
 
 
