@@ -22,26 +22,9 @@ namespace BackendTeams.Infrastructure.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder);
 
-            modelBuilder.Entity("BackendTeams.Domain.Entities.GroupEntity", b =>
-                {
-                    b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("Name")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("Id");
-
-                    b.ToTable("Groups", "teams");
-                });
-
             modelBuilder.Entity("BackendTeams.Domain.Entities.MemberEntity", b =>
                 {
                     b.Property<string>("Id")
-                        .HasColumnType("nvarchar(450)");
-
-                    b.Property<string>("GroupEntityId")
                         .HasColumnType("nvarchar(450)");
 
                     b.Property<string>("GroupId")
@@ -54,21 +37,7 @@ namespace BackendTeams.Infrastructure.Migrations
 
                     b.HasKey("Id");
 
-                    b.HasIndex("GroupEntityId");
-
                     b.ToTable("Members", "teams");
-                });
-
-            modelBuilder.Entity("BackendTeams.Domain.Entities.MemberEntity", b =>
-                {
-                    b.HasOne("BackendTeams.Domain.Entities.GroupEntity", null)
-                        .WithMany("Members")
-                        .HasForeignKey("GroupEntityId");
-                });
-
-            modelBuilder.Entity("BackendTeams.Domain.Entities.GroupEntity", b =>
-                {
-                    b.Navigation("Members");
                 });
 #pragma warning restore 612, 618
         }

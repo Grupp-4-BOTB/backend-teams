@@ -1,4 +1,5 @@
-﻿using BackendTeams.Domain.Entities;
+﻿using BackendTeams.Application.Interfaces;
+using BackendTeams.Domain.Entities;
 using BackendTeams.DTOs;
 using BackendTeams.Infrastructure.Data;
 using Microsoft.AspNetCore.Authorization;
@@ -16,9 +17,9 @@ namespace BackendTeams.Controllers
                     // STÄNG AV SÅLÄNGE TILLS GABRIEL FIXAT SAMMA. ANNARS KRÅNGLAR SWAGGER.
     public class MembersController : ControllerBase
     {
-        private readonly TeamsDbContext _context;
+        private readonly IApplicationDbContext _context;
 
-        public MembersController(TeamsDbContext context)
+        public MembersController(IApplicationDbContext context)
         {
             _context = context;
         }
@@ -78,7 +79,7 @@ namespace BackendTeams.Controllers
         [HttpDelete("{id}")]
         public async Task<IActionResult> DeleteMember(string id)
         {
-            var member = await _context.Members.FindAsync(id);
+            var member = await _context.Members.FirstOrDefaultAsync(m => m.Id == id);
             if (member == null) return NotFound();
 
             _context.Members.Remove(member);

@@ -54,16 +54,13 @@ builder.Services.AddSwagger();
 
 // DATABASEN
 // DÅ VI INTE HAR EN DATABAS JUST NU SÅ FÅR VI KOMMENTERA UT DENNA
-/*builder.Services.AddDbContext<TeamsDbContext>(options =>
-    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLAzure")));*/
+builder.Services.AddDbContext<TeamsDbContext>(options =>
+    options.UseSqlServer(builder.Configuration.GetConnectionString("SQLAzure")));
 
 
 // IApplicationDbContext som just nu ger all info från TeamsDbContext till servicen
 //Också utkommenterad för att allt inte ska krascha
-/*builder.Services.AddScoped<BackendTeams.Application.Interfaces.IApplicationDbContext>(provider =>
-    provider.GetRequiredService<TeamsDbContext>());*/
-
-
+builder.Services.AddScoped<BackendTeams.Application.Interfaces.IApplicationDbContext, TeamsDbContext>();
 
 var app = builder.Build();
 
